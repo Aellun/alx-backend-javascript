@@ -5,10 +5,10 @@ export default async function asyncUploadUser() {
   try {
     // Await the result of the uploadPhoto function
     const photo = await uploadPhoto();
-    
+
     // Await the result of the createUser function
     const user = await createUser();
-    
+
     // Return an object containing the results of the two async functions
     return {
       photo,

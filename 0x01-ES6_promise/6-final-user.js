@@ -3,8 +3,8 @@ import signUpUser from './4-user-promise';
 // Import the function to upload a photo
 import uploadPhoto from './5-photo-reject';
 
- //Handles the profile signup process by calling both signUpUser and uploadPhoto functions.
- 
+// Handles the profile signup process by calling both signUpUser and uploadPhoto functions.
+
 export default function handleProfileSignup(firstName, lastName, fileName) {
   // Create promises for user sign-up and photo upload
   const signUpUserPromise = signUpUser(firstName, lastName);
