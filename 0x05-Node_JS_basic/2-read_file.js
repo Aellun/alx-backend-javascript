@@ -1,46 +1,44 @@
 const fs = require('fs');
 
-/**
- * Reads a CSV file and counts students by field.
- * @param {string} fileName - The path to the CSV file.
- */
 function countStudents(fileName) {
-  const students = {};
-  const fields = {};
-  let studentCount = 0;
+  const students = {}; // Stores students by field
+  const fields = {}; // Counts students by field
+  let totalStudents = 0; // Total number of students
 
   try {
+    // Reads and splits the file content by new lines
     const content = fs.readFileSync(fileName, 'utf-8');
-    const lines = content.trim().split('\n');
+    const lines = content.split('\n').filter((line) => line.trim() !== '');
 
-    if (lines.length <= 1) {
-      throw new Error('Cannot load the database');
-    }
+    // Processes each line except the header
+    for (let i = 1; i < lines.length; i += 1) {
+      const [firstname, , , field] = lines[i].split(',');
 
-    // Process each line after the header
-    lines.slice(1).forEach((line) => {
-      if (line) {
-        studentCount += 1;
-        const [name, , , field] = line.split(',');
-
+      // Process only lines with valid data
+      if (firstname && field) {
+      // Stores student names by field
         if (!students[field]) {
           students[field] = [];
+        }
+        students[field].push(firstname);
+
+        // Counts the number of students in each field
+        if (!fields[field]) {
           fields[field] = 0;
         }
-
-        students[field].push(name);
         fields[field] += 1;
+
+        totalStudents += 1;
       }
-    });
+    }
 
-    // Log the number of students
-    console.log(`Number of students: ${studentCount}`);
-
-    // Log the number of students in each field
-    for (const [field, count] of Object.entries(fields)) {
-      console.log(`Number of students in ${field}: ${count}. List: ${students[field].join(', ')}`);
+    // Output the results
+    console.log(`Number of students: ${totalStudents}`);
+    for (const [field, names] of Object.entries(students)) {
+      console.log(`Number of students in ${field}: ${names.length}. List: ${names.join(', ')}`);
     }
   } catch (error) {
+    // Handle file read errors
     console.error('Cannot load the database');
   }
 }
