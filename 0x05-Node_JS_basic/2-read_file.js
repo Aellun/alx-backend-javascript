@@ -16,7 +16,7 @@ function countStudents(fileName) {
 
       // Process only lines with valid data
       if (firstname && field) {
-      // Stores student names by field
+        // Stores student names by field
         if (!students[field]) {
           students[field] = [];
         }
@@ -38,8 +38,8 @@ function countStudents(fileName) {
       console.log(`Number of students in ${field}: ${names.length}. List: ${names.join(', ')}`);
     }
   } catch (error) {
-    // Handle file read errors
-    console.error('Cannot load the database');
+    // Throw an error if the file cannot be read
+    throw new Error('Cannot load the database');
   }
 }
 
