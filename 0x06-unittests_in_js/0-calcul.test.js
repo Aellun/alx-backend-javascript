@@ -3,12 +3,12 @@ const assert = require('assert');
 const calculateNumber = require('./0-calcul');
 
 describe('calculateNumber', function() {
-  // Test case for integers
+  // integers Test case 
   it('should return 4 when given 1 and 3', function() {
     assert.strictEqual(calculateNumber(1, 3), 4);
   });
 
-  // Test case for rounding floating-point numbers
+  // Rounding floating-point numbers Test case
   it('should return 5 when given 1 and 3.7', function() {
     assert.strictEqual(calculateNumber(1, 3.7), 5);
   });
