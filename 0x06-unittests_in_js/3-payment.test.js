@@ -1,27 +1,23 @@
-import sinon from 'sinon';
-import { expect } from 'chai';
-import { calculateNumber } from './utils.js'; // Import the specific function
-import { sendPaymentRequestToApi } from './3-payment.js';
+// 3-payment.test.js
 
-// Test suite for sendPaymentRequestToApi
-describe('sendPaymentRequestToApi', () => {
-  let spy;
+const { expect } = require('chai');
+const sinon = require('sinon');
+const Utils = require('./utils');
+const sendPaymentRequestToApi = require('./3-payment');
 
-  beforeEach(() => {
-    // Create a spy for calculateNumber
-    spy = sinon.spy(calculateNumber);
+describe('sendPaymentRequestToApi', function () {
+  afterEach(function () {
+    sinon.restore(); // Restore the default sandbox
   });
 
-  afterEach(() => {
-    // Restore the original function
-    spy.restore();
-  });
+  it('should call Utils.calculateNumber with SUM and the correct arguments', function () {
+    const spy = sinon.spy(Utils, 'calculateNumber');
 
-  it('should call calculateNumber with SUM and correct arguments', () => {
-    // Use the spy in the function call
     sendPaymentRequestToApi(100, 20);
 
-    // Check if the spy was called with the correct arguments
-    expect(spy.calledOnceWithExactly('SUM', 100, 20)).to.be.true;
+    // Check if the spy was called once
+    expect(spy.calledOnce).to.be.true;
+    // Check if called with the right arguments
+    expect(spy.calledWith('SUM', 100, 20)).to.be.true;
   });
 });

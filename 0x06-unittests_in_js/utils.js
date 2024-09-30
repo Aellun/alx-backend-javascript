@@ -1,29 +1,26 @@
 // utils.js
 
-// Function to perform arithmetic operations with rounded numbers
-export function calculateNumber(type, a, b) {
-    const roundedA = Math.round(a);
-    const roundedB = Math.round(b);
-  
-    // addition
-    if (type === 'SUM') {
+function calculateNumber(type, a, b) {
+  const roundedA = Math.round(a);
+  const roundedB = Math.round(b);
+
+  switch (type) {
+    case 'SUM':
       return roundedA + roundedB;
-    }
-  
-    // subtraction
-    if (type === 'SUBTRACT') {
+    case 'SUBTRACT':
       return roundedA - roundedB;
-    }
-  
-    // division
-    if (type === 'DIVIDE') {
+    case 'DIVIDE':
       if (roundedB === 0) {
-        return 'Error'; // Handle division by zero
+        return 'Error';
       }
       return roundedA / roundedB;
-    }
-  
-    // Handles invalid operation type
-    throw new Error('Invalid type');
+    default:
+      throw new Error('Invalid type');
   }
-  
+}
+
+const Utils = {
+  calculateNumber,
+};
+
+module.exports = Utils;
