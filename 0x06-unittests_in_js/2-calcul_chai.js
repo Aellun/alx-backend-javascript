@@ -1,19 +1,31 @@
+// 1-calcul.js
+
+/**
+ * Performs arithmetic operations on two numbers.
+ *
+ * @param {string} type - The type of operation ('SUM', 'SUBTRACT', 'DIVIDE').
+ * @param {number} a - The first operand.
+ * @param {number} b - The second operand.
+ * @returns {number|string} The result of the operation or 'Error' if division by zero occurs.
+ */
 function calculateNumber(type, a, b) {
-    const rounded_a = Math.round(a);
-    const rounded_b = Math.round(b);
-    
-    if (type === 'SUM') {
-      return rounded_a + rounded_b;
-    }
-    if (type === 'SUBTRACT') {
-      return rounded_a - rounded_b;
-    }
-    if (type === 'DIVIDE') {
-      if (rounded_b === 0) {
+  // Round both operands to the nearest integer
+  const roundedA = Math.round(a);
+  const roundedB = Math.round(b);
+
+  switch (type) {
+    case 'SUM':
+      return roundedA + roundedB;
+    case 'SUBTRACT':
+      return roundedA - roundedB;
+    case 'DIVIDE':
+      if (roundedB === 0) {
         return 'Error';
       }
-      return rounded_a / rounded_b;
-    }
+      return roundedA / roundedB;
+    default:
+      throw new Error('Invalid type');
   }
-  
-  module.exports = calculateNumber;
+}
+
+module.exports = calculateNumber;
